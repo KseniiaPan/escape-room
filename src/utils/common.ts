@@ -9,7 +9,6 @@ const getQuestLevelRuName = (level: string) => {
     case QuestLevel.Medium.enName:
       questLevel = QuestLevel.Medium.ruName;
       break;
-
     case QuestLevel.Hard.enName:
       questLevel = QuestLevel.Hard.ruName;
       break;

@@ -48,7 +48,13 @@ function App({quests}: AppProps): JSX.Element {
             />
             <Route
               path={AppRoute.QuestBooking}
-              element={<QuestBookingPage />}
+              element={
+                <PrivateRoute
+                  authorizationStatus={AuthorizationStatus.NoAuth}
+                >
+                  <QuestBookingPage />
+                </PrivateRoute>
+              }
             />
             <Route
               path={AppRoute.Contacts}

@@ -1,3 +1,4 @@
+import Map from '../../components/map/map';
 function ContactsPage(): JSX.Element {
   return (
     <main className="page-content decorated-page">
@@ -59,7 +60,9 @@ function ContactsPage(): JSX.Element {
           </dl>
           <div className="contacts__map">
             <div className="map">
-              <div className="map__container" />
+              <div className="map__container">
+                <Map/>
+              </div>
             </div>
           </div>
         </div>

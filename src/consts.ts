@@ -1,3 +1,5 @@
+import {LatLngExpression} from 'leaflet';
+
 export enum AppRoute {
   Main = '/',
   Login = '/login',
@@ -32,3 +34,22 @@ export const QuestLevel = {
     ruName: 'сложный',
   },
 } as const;
+
+export const MapIconInfo = {
+  iconSize: [23, 42],
+  iconAnchor: [20, 40]
+};
+
+export const MapIcon = {
+  Default: {
+    iconUrl: 'img/svg/pin-default.svg',
+    MapIconInfo
+  },
+  Active: {
+    iconUrl: 'img/svg/pin-active.svg',
+    MapIconInfo
+  },
+} as const;
+
+export const mainAddressCoords = [59.968322, 30.317359] as LatLngExpression;
+export const MAP_ZOOM = 13;
