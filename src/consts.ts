@@ -13,3 +13,22 @@ export enum AuthorizationStatus {
   NoAuth = 'NO_AUTH',
   Unknown = 'UNKNOWN',
 }
+
+export const QuestLevel = {
+  Any: {
+    enName: 'any',
+    ruName: 'любой',
+  },
+  Easy: {
+    enName: 'easy',
+    ruName: 'легкий',
+  },
+  Medium: {
+    enName: 'medium',
+    ruName: 'средний',
+  },
+  Hard: {
+    enName: 'hard',
+    ruName: 'сложный',
+  },
+} as const;

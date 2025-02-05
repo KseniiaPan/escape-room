@@ -11,8 +11,12 @@ import NotFoundPage from '../../pages/not-found-page/not-found-page';
 import PrivateRoute from '../private-route/private-route';
 import Layout from '../layout/layout';
 import {AppRoute, AuthorizationStatus} from '../../consts';
+import {Quest} from '../../types/quests-types';
 
-function App(): JSX.Element {
+type AppProps = {
+  quests: Quest[];
+}
+function App({quests}: AppProps): JSX.Element {
   return (
     <HelmetProvider>
       <BrowserRouter>
@@ -20,7 +24,7 @@ function App(): JSX.Element {
           <Route path='/' element={<Layout />}>
             <Route
               path={AppRoute.Main}
-              element={<MainPage />}
+              element={<MainPage quests={quests}/>}
             />
             <Route
               path={AppRoute.Login}
