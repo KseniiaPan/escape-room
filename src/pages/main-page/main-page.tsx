@@ -1,4 +1,4 @@
-import QuestsFilter from '../../components/quests-filter/quests-filter';
+import QuestsFiltersContainer from '../../components/quests-filters-container/quests-filters-container';
 import QuestCardsList from '../../components/quest-cards-list/quest-cards-list';
 import {Quest} from '../../types/quests-types';
 
@@ -18,7 +18,7 @@ function MainPage({quests}: MainPageProps): JSX.Element {
           </h2>
         </div>
         <div className="page-content__item">
-          <QuestsFilter />
+          <QuestsFiltersContainer />
         </div>
         <h2 className="title visually-hidden">Выберите квест</h2>
         <QuestCardsList quests={quests}/>

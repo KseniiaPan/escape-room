@@ -7,3 +7,8 @@ export type Quest = {
     type: string;
     peopleMinMax: number[];
   };
+
+export type QuestFilter = {
+      name: string;
+      ruName: string;
+  }

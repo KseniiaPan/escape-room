@@ -1,19 +1,13 @@
-import {QuestLevel} from '../consts';
+import {questLevels} from '../consts';
+import {QuestFilter} from '../types/quests-types';
 
 const getQuestLevelRuName = (level: string) => {
-  let questLevel;
-  switch (level) {
-    case QuestLevel.Easy.enName:
-      questLevel = QuestLevel.Easy.ruName;
-      break;
-    case QuestLevel.Medium.enName:
-      questLevel = QuestLevel.Medium.ruName;
-      break;
-    case QuestLevel.Hard.enName:
-      questLevel = QuestLevel.Hard.ruName;
-      break;
-  }
-  return questLevel;
+  const currentQuestLevel = questLevels.find((questLevel) => questLevel.name === level);
+  return currentQuestLevel && currentQuestLevel.ruName;
 };
 
-export {getQuestLevelRuName};
+const capitalize = (word: string): string => word.charAt(0).toUpperCase() + word.slice(1);
+
+const isDefaultCheked = (defaultValue: QuestFilter, currentValue: QuestFilter) => currentValue.name === defaultValue.name;
+
+export {getQuestLevelRuName, capitalize, isDefaultCheked};

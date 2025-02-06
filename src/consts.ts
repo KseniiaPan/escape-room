@@ -16,24 +16,51 @@ export enum AuthorizationStatus {
   Unknown = 'UNKNOWN',
 }
 
-export const QuestLevel = {
-  Any: {
-    enName: 'any',
+export const questLevels = [
+  {
+    name: 'any',
     ruName: 'любой',
   },
-  Easy: {
-    enName: 'easy',
+  {
+    name: 'easy',
     ruName: 'легкий',
   },
-  Medium: {
-    enName: 'medium',
+  {
+    name: 'medium',
     ruName: 'средний',
   },
-  Hard: {
-    enName: 'hard',
+  {
+    name: 'hard',
     ruName: 'сложный',
   },
-} as const;
+];
+
+export const questThemes = [
+  {
+    name: 'all-quests',
+    ruName: 'Все квесты',
+  },
+  {
+    name: 'adventure',
+    ruName: 'Приключения',
+  },
+  {
+    name: 'horror',
+    ruName: 'Ужасы',
+  },
+  {
+    name: 'mystic',
+    ruName: 'Мистика',
+  },
+  {
+    name: 'detective',
+    ruName: 'Детектив',
+  },
+  {
+    name: 'sci-fi',
+    ruName: 'Sci-fi',
+  },
+];
 
 export const MapIconInfo = {
   iconSize: [23, 42],
