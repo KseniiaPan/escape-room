@@ -1,4 +1,8 @@
+import {Link} from 'react-router-dom';
+import {AppRoute} from '../../consts';
+
 function QuestPage(): JSX.Element {
+  const mockId = '27af4ec9-ebe6-4eeb-b871-1d32e2d44709';
   return (
     <main className="decorated-page quest-page">
       <div className="decorated-page__decor" aria-hidden="true">
@@ -48,12 +52,12 @@ function QuestPage(): JSX.Element {
           ситуации, помочь другим, разобраться что произошло и&nbsp;выбраться
           из&nbsp;комнаты?
           </p>
-          <a
+          <Link
             className="btn btn--accent btn--cta quest-page__btn"
-            href="booking.html"
+            to={AppRoute.QuestBooking.replace(':id', mockId)}
           >
           Забронировать
-          </a>
+          </Link>
         </div>
       </div>
     </main>

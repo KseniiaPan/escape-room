@@ -36,7 +36,7 @@ function App({quests}: AppProps): JSX.Element {
               path={AppRoute.MyQuests}
               element={
                 <PrivateRoute
-                  authorizationStatus={AuthorizationStatus.NoAuth}
+                  authorizationStatus={AuthorizationStatus.Auth}
                 >
                   <MyQuestsPage />
                 </PrivateRoute>
@@ -50,7 +50,7 @@ function App({quests}: AppProps): JSX.Element {
               path={AppRoute.QuestBooking}
               element={
                 <PrivateRoute
-                  authorizationStatus={AuthorizationStatus.NoAuth}
+                  authorizationStatus={AuthorizationStatus.Auth}
                 >
                   <QuestBookingPage />
                 </PrivateRoute>
