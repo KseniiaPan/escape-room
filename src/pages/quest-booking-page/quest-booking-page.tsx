@@ -1,6 +1,6 @@
 import {useState} from 'react';
 import BookingForm from '../../components/booking-form/booking-form';
-import MapBooking from '../../components/map-booking/map-booking';
+import Map from '../../components/map/map';
 import {QuestBookingInfo} from '../../types/quests-types';
 import {defaultSpbCoords} from '../../consts';
 
@@ -20,6 +20,7 @@ function QuestBookingPage({bookingInfo}:QuestBookingPageProps): JSX.Element {
 
   const chosenQuestInfo = activeQuestLocation && bookingInfo.find((bookingInfoItem) => bookingInfoItem.id === activeQuestLocation);
   const displayedQuestInfo = chosenQuestInfo || bookingInfo[0];
+  const questLocations = bookingInfo.map(({id, location}) => ({id, location}));
 
   return (
     <main className="page-content decorated-page">
@@ -51,7 +52,7 @@ function QuestBookingPage({bookingInfo}:QuestBookingPageProps): JSX.Element {
           <div className="booking-map">
             <div className="map">
               <div className="map__container">
-                <MapBooking questLocations={bookingInfo} centerCoords={defaultSpbCoords} onActiveQuestLocationChange={handleActiveQuestLocationChange}/>
+                <Map questLocations={questLocations} centerCoords={defaultSpbCoords} activeLocationId={activeQuestLocation} onActiveQuestLocationChange={handleActiveQuestLocationChange}/>
               </div>
             </div>
             <p className="booking-map__address">

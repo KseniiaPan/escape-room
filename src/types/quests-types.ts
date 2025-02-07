@@ -32,3 +32,4 @@ export type QuestBookingInfo = {
   location: QuestLocation;
   slots: QuestTimeSlots;
 }
+export type CurrentQuestLocation = Omit<QuestBookingInfo, 'slots'>;

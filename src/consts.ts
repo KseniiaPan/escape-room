@@ -83,7 +83,10 @@ export const mainAddressCoords = [59.968322, 30.317359] as LatLngExpression;
 export const defaultSpbCoords = [59.9386, 30.3141] as LatLngExpression;
 export const MAP_ZOOM = 13;
 
-export const MainAddress = {
-  address: 'Набережная реки Карповка, д 5П',
-  coords: mainAddressCoords,
-};
+export const contactsAddresses = [{
+  id: '12345678',
+  location: {
+    address: 'Набережная реки Карповка, д 5П',
+    coords: mainAddressCoords,
+  }
+}];

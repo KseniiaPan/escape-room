@@ -1,22 +1,25 @@
 import { Marker } from 'react-leaflet';
 import {icon} from 'leaflet';
-import {QuestBookingInfo} from '../../types/quests-types';
+import {CurrentQuestLocation} from '../../types/quests-types';
 import {MapIcon} from '../../consts';
 
 type MapMarkersProps = {
-  questLocations: QuestBookingInfo[];
-  onActiveQuestLocationChange: (id: string) => void;
+  questLocations: CurrentQuestLocation[];
+  activeLocationId: string | null;
+  onActiveQuestLocationChange?: (id: string) => void;
 }
-function MapMarkers({questLocations, onActiveQuestLocationChange}:MapMarkersProps) {
+function MapMarkers({questLocations, activeLocationId, onActiveQuestLocationChange}:MapMarkersProps) {
   return (
     questLocations.map((questLocation) => (
       <Marker
         key={questLocation.id}
         position={questLocation.location.coords}
-        icon={icon(MapIcon.Active)}
+        icon={questLocation.id === activeLocationId ? icon(MapIcon.Active) : icon(MapIcon.Default)}
         eventHandlers={{
           click: () => {
-            onActiveQuestLocationChange(questLocation.id);
+            if(onActiveQuestLocationChange) {
+              onActiveQuestLocationChange(questLocation.id);
+            }
           },
         }}
       >

@@ -1,5 +1,6 @@
 import Map from '../../components/map/map';
-import {MainAddress} from '../../consts';
+
+import {contactsAddresses} from '../../consts';
 
 function ContactsPage(): JSX.Element {
   return (
@@ -33,7 +34,7 @@ function ContactsPage(): JSX.Element {
               <dd className="contacts__dd">
                 <address className="contacts__address">
                 Санкт-Петербург,
-                  <br /> {MainAddress.address}
+                  <br /> {contactsAddresses[0].location.address}
                 </address>
               </dd>
             </div>
@@ -63,7 +64,7 @@ function ContactsPage(): JSX.Element {
           <div className="contacts__map">
             <div className="map">
               <div className="map__container">
-                <Map />
+                <Map questLocations={contactsAddresses} centerCoords={contactsAddresses[0].location.coords} activeLocationId={contactsAddresses[0].id}/>
               </div>
             </div>
           </div>
