@@ -1,4 +1,12 @@
-function BookingFormContacts(): JSX.Element {
+import {QuestBookingForm} from '../../types/quests-types';
+type BookingFormContactsProps = {
+  formData: QuestBookingForm;
+  isChecked: boolean;
+  onChange: React.ChangeEventHandler<HTMLElement>;
+  onCkeckboxValueChange: React.ChangeEventHandler<HTMLElement>;
+}
+
+function BookingFormContacts({formData, isChecked, onChange, onCkeckboxValueChange}:BookingFormContactsProps): JSX.Element {
   return (
     <fieldset className="booking-form__section">
       <legend className="visually-hidden">Контактная информация</legend>
@@ -9,7 +17,9 @@ function BookingFormContacts(): JSX.Element {
         <input
           type="text"
           id="name"
-          name="name"
+          name="contactPerson"
+          value={formData.contactPerson}
+          onChange={onChange}
           placeholder="Имя"
           required
           pattern="[А-Яа-яЁёA-Za-z'- ]{1,}"
@@ -22,7 +32,9 @@ function BookingFormContacts(): JSX.Element {
         <input
           type="tel"
           id="tel"
-          name="tel"
+          name="phone"
+          value={String(formData.phone)}
+          onChange={onChange}
           placeholder="Телефон"
           required
           pattern="[0-9]{10,}"
@@ -35,7 +47,9 @@ function BookingFormContacts(): JSX.Element {
         <input
           type="number"
           id="person"
-          name="person"
+          name="peopleCount"
+          value={Number(formData.peopleCount)}
+          onChange={onChange}
           placeholder="Количество участников"
           required
         />
@@ -44,8 +58,9 @@ function BookingFormContacts(): JSX.Element {
         <input
           type="checkbox"
           id="children"
-          name="children"
-          defaultChecked
+          name="withChildren"
+          checked={isChecked}
+          onChange={onCkeckboxValueChange}
         />
         <span className="custom-checkbox__icon">
           <svg width={20} height={17} aria-hidden="true">

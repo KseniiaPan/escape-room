@@ -1,9 +1,13 @@
-import {QuestTimeSlots} from '../../types/quests-types';
+import {QuestTimeSlots, QuestBookingForm} from '../../types/quests-types';
 
 type BookingFormDateProps = {
   slots: QuestTimeSlots;
+  formData: QuestBookingForm;
+  onChange: React.ChangeEventHandler<HTMLElement>;
 }
-function BookingFormDate({slots}: BookingFormDateProps): JSX.Element {
+
+function BookingFormDate({slots, formData, onChange}: BookingFormDateProps): JSX.Element {
+
   return (
     <fieldset className="booking-form__section">
       <legend className="visually-hidden">Выбор даты и времени</legend>
@@ -14,10 +18,14 @@ function BookingFormDate({slots}: BookingFormDateProps): JSX.Element {
             <label className="custom-radio booking-form__date" key={slot.time}>
               <input
                 type="radio"
-                id="today9h45m"
+                id={`today${slot.time}`}
                 name="date"
                 required
-                defaultValue="today9h45m"
+                defaultValue={`today${slot.time}`}
+                value={formData.date && formData.time && `${formData.date}${formData.time}}`}
+                onChange={onChange}
+                data-day = 'today'
+                data-time={slot.time}
                 disabled={!slot.isAvailable}
               />
               <span className="custom-radio__label">{slot.time}</span>
@@ -33,10 +41,14 @@ function BookingFormDate({slots}: BookingFormDateProps): JSX.Element {
             <label className="custom-radio booking-form__date" key={slot.time}>
               <input
                 type="radio"
-                id="tomorrow11h00m"
+                id={`tomorrow${slot.time}`}
                 name="date"
                 required
-                defaultValue="tomorrow11h00m"
+                defaultValue={`tomorrow${slot.time}`}
+                value={formData.date && formData.time && `${formData.date}${formData.time}}`}
+                onChange={onChange}
+                data-day = 'tomorrow'
+                data-time={slot.time}
                 disabled={!slot.isAvailable}
               />
               <span className="custom-radio__label">{slot.time}</span>

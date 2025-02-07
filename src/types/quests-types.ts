@@ -33,3 +33,11 @@ export type QuestBookingInfo = {
   slots: QuestTimeSlots;
 }
 export type CurrentQuestLocation = Omit<QuestBookingInfo, 'slots'>;
+
+export type QuestBookingForm = {
+  date: string | undefined;
+  time: string | undefined;
+  contactPerson: string;
+  phone: string;
+  peopleCount: undefined | number;
+};

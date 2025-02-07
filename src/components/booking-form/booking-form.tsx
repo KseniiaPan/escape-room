@@ -1,13 +1,30 @@
 import BookingFormContacts from '../../components/booking-form-contacts/booking-form-contacts';
 import BookingFormDate from '../../components/booking-form-date/booking-form-date';
 import {QuestBookingInfo} from '../../types/quests-types';
+import {ChangeEvent, useState} from 'react';
+import {QuestBookingForm} from '../../types/quests-types';
 
-
+const initialState: QuestBookingForm = {
+  date: '',
+  time: '',
+  contactPerson: '',
+  phone: '',
+  peopleCount: undefined,
+};
 type QuestBookingPageProps = {
   questInfo: QuestBookingInfo;
 }
 
-function BookingForm({questInfo}:QuestBookingPageProps): JSX.Element {
+function BookingForm({questInfo}:QuestBookingPageProps) {
+  const [formData, setFormData] = useState<QuestBookingForm>(initialState);
+  const [checked, setChecked] = useState(true);
+
+  const handleValueChange = (evt: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>):void => {
+    const {value, dataset, name} = evt.target;
+    setFormData(name === 'date' ? {...formData, date: dataset.day, time: dataset.time} : {...formData, [name]: value});
+  };
+
+  const handleCheckboxValueChange = () => setChecked(!checked);
 
   return(
     <form
@@ -15,8 +32,8 @@ function BookingForm({questInfo}:QuestBookingPageProps): JSX.Element {
       action="https://echo.htmlacademy.ru/"
       method="post"
     >
-      <BookingFormDate slots={questInfo.slots}/>
-      <BookingFormContacts/>
+      <BookingFormDate slots={questInfo.slots} formData={formData} onChange={handleValueChange}/>
+      <BookingFormContacts formData={formData} onChange={handleValueChange} onCkeckboxValueChange={handleCheckboxValueChange} isChecked={checked}/>
       <button
         className="btn btn--accent btn--cta booking-form__submit"
         type="submit"
