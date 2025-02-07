@@ -1,3 +1,5 @@
+import {LatLngExpression} from 'leaflet';
+
 export type Quest = {
     id: string;
     title: string;
@@ -12,3 +14,21 @@ export type QuestFilter = {
       name: string;
       ruName: string;
   }
+export type QuestSlot = {
+  time: string;
+  isAvailable: boolean;
+}
+
+export type QuestLocation = {
+  address: string;
+  coords: LatLngExpression;
+}
+export type QuestTimeSlots = {
+  today: QuestSlot[];
+  tomorrow: QuestSlot[];
+}
+export type QuestBookingInfo = {
+  id: string;
+  location: QuestLocation;
+  slots: QuestTimeSlots;
+}

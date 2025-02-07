@@ -1,4 +1,6 @@
 import Map from '../../components/map/map';
+import {MainAddress} from '../../consts';
+
 function ContactsPage(): JSX.Element {
   return (
     <main className="page-content decorated-page">
@@ -31,7 +33,7 @@ function ContactsPage(): JSX.Element {
               <dd className="contacts__dd">
                 <address className="contacts__address">
                 Санкт-Петербург,
-                  <br /> Набережная реки Карповка, д 5П
+                  <br /> {MainAddress.address}
                 </address>
               </dd>
             </div>
@@ -61,7 +63,7 @@ function ContactsPage(): JSX.Element {
           <div className="contacts__map">
             <div className="map">
               <div className="map__container">
-                <Map/>
+                <Map />
               </div>
             </div>
           </div>

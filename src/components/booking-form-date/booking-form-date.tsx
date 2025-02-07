@@ -1,0 +1,50 @@
+import {QuestTimeSlots} from '../../types/quests-types';
+
+type BookingFormDateProps = {
+  slots: QuestTimeSlots;
+}
+function BookingFormDate({slots}: BookingFormDateProps): JSX.Element {
+  return (
+    <fieldset className="booking-form__section">
+      <legend className="visually-hidden">Выбор даты и времени</legend>
+      <fieldset className="booking-form__date-section">
+        <legend className="booking-form__date-title">Сегодня</legend>
+        <div className="booking-form__date-inner-wrapper">
+          {slots.today.map((slot) => (
+            <label className="custom-radio booking-form__date" key={slot.time}>
+              <input
+                type="radio"
+                id="today9h45m"
+                name="date"
+                required
+                defaultValue="today9h45m"
+                disabled={!slot.isAvailable}
+              />
+              <span className="custom-radio__label">{slot.time}</span>
+            </label>
+          ))}
+
+        </div>
+      </fieldset>
+      <fieldset className="booking-form__date-section">
+        <legend className="booking-form__date-title">Завтра</legend>
+        <div className="booking-form__date-inner-wrapper">
+          {slots.tomorrow.map((slot) => (
+            <label className="custom-radio booking-form__date" key={slot.time}>
+              <input
+                type="radio"
+                id="tomorrow11h00m"
+                name="date"
+                required
+                defaultValue="tomorrow11h00m"
+                disabled={!slot.isAvailable}
+              />
+              <span className="custom-radio__label">{slot.time}</span>
+            </label>
+          ))}
+        </div>
+      </fieldset>
+    </fieldset>
+  );
+}
+export default BookingFormDate;

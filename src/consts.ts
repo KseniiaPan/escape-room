@@ -69,14 +69,21 @@ export const MapIconInfo = {
 
 export const MapIcon = {
   Default: {
-    iconUrl: 'img/svg/pin-default.svg',
+    iconUrl: 'public/img/svg/pin-default.svg',
     MapIconInfo
   },
   Active: {
-    iconUrl: 'img/svg/pin-active.svg',
+    iconUrl: 'public/img/svg/pin-active.svg',
     MapIconInfo
   },
 } as const;
 
 export const mainAddressCoords = [59.968322, 30.317359] as LatLngExpression;
+
+export const defaultSpbCoords = [59.9386, 30.3141] as LatLngExpression;
 export const MAP_ZOOM = 13;
+
+export const MainAddress = {
+  address: 'Набережная реки Карповка, д 5П',
+  coords: mainAddressCoords,
+};

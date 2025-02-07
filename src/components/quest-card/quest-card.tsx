@@ -5,18 +5,14 @@ import {AppRoute} from '../../consts';
 
 type QuestCardProps = {
   quest: Quest;
-  onActiveCardChange?: (id: string | null) => void;
 }
 
-function QuestCard({quest, onActiveCardChange}:QuestCardProps): JSX.Element {
+function QuestCard({quest}:QuestCardProps): JSX.Element {
   const {id, previewImgWebp, previewImg, title, peopleMinMax, level} = quest;
   const currentQuestLevel = getQuestLevelRuName(level);
 
   return (
-    <div className="quest-card"
-      onMouseEnter={() => onActiveCardChange && onActiveCardChange(id)}
-      onMouseLeave={() => onActiveCardChange && onActiveCardChange(null)}
-    >
+    <div className="quest-card">
       <div className="quest-card__img">
         <picture>
           <source

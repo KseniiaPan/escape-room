@@ -1,5 +1,5 @@
 import { MapContainer, TileLayer, Marker } from 'react-leaflet';
-import leaflet from 'leaflet';
+import {icon} from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import {mainAddressCoords, MAP_ZOOM, MapIcon} from '../../consts';
 
@@ -10,7 +10,7 @@ function Map(): JSX.Element {
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
-      <Marker position={mainAddressCoords} icon={leaflet.icon(MapIcon.Active)}/>
+      <Marker position={mainAddressCoords} icon={icon(MapIcon.Active)}/>
     </MapContainer>
   );
 }

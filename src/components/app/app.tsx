@@ -11,12 +11,13 @@ import NotFoundPage from '../../pages/not-found-page/not-found-page';
 import PrivateRoute from '../private-route/private-route';
 import Layout from '../layout/layout';
 import {AppRoute, AuthorizationStatus} from '../../consts';
-import {Quest} from '../../types/quests-types';
+import {Quest, QuestBookingInfo} from '../../types/quests-types';
 
 type AppProps = {
   quests: Quest[];
+  bookingInfo: QuestBookingInfo[];
 }
-function App({quests}: AppProps): JSX.Element {
+function App({quests, bookingInfo}: AppProps): JSX.Element {
   return (
     <HelmetProvider>
       <BrowserRouter>
@@ -52,7 +53,7 @@ function App({quests}: AppProps): JSX.Element {
                 <PrivateRoute
                   authorizationStatus={AuthorizationStatus.Auth}
                 >
-                  <QuestBookingPage />
+                  <QuestBookingPage bookingInfo={bookingInfo}/>
                 </PrivateRoute>
               }
             />

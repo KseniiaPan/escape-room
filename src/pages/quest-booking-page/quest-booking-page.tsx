@@ -1,4 +1,26 @@
-function QuestBookingPage(): JSX.Element {
+import {useState} from 'react';
+import BookingFormContacts from '../../components/booking-form-contacts/booking-form-contacts';
+import BookingFormDate from '../../components/booking-form-date/booking-form-date';
+import MapBooking from '../../components/map-booking/map-booking';
+import {QuestBookingInfo} from '../../types/quests-types';
+import {defaultSpbCoords} from '../../consts';
+
+
+type QuestBookingPageProps = {
+  bookingInfo: QuestBookingInfo[];
+}
+
+function QuestBookingPage({bookingInfo}:QuestBookingPageProps): JSX.Element {
+
+  const [activeQuestLocation, setActiveQuestLocation] = useState<string | null>(null);
+  const handleActiveQuestLocationChange = (id: string) => {
+    if (id !== activeQuestLocation) {
+      setActiveQuestLocation(id);
+    }
+  };
+
+  const chosenQuestInfo = activeQuestLocation && bookingInfo.find((bookingInfoItem) => bookingInfoItem.id === activeQuestLocation);
+
   return (
     <main className="page-content decorated-page">
       <div className="decorated-page__decor" aria-hidden="true">
@@ -28,11 +50,12 @@ function QuestBookingPage(): JSX.Element {
         <div className="page-content__item">
           <div className="booking-map">
             <div className="map">
-              <div className="map__container" />
+              <div className="map__container">
+                <MapBooking questLocations={bookingInfo} centerCoords={defaultSpbCoords} onActiveQuestLocationChange={handleActiveQuestLocationChange}/>
+              </div>
             </div>
             <p className="booking-map__address">
-            Вы&nbsp;выбрали: наб. реки Карповки&nbsp;5, лит&nbsp;П, м.
-            Петроградская
+            Вы&nbsp;выбрали: {chosenQuestInfo ? chosenQuestInfo.location.address : bookingInfo[0].location.address}
             </p>
           </div>
         </div>
@@ -41,180 +64,8 @@ function QuestBookingPage(): JSX.Element {
           action="https://echo.htmlacademy.ru/"
           method="post"
         >
-          <fieldset className="booking-form__section">
-            <legend className="visually-hidden">Выбор даты и времени</legend>
-            <fieldset className="booking-form__date-section">
-              <legend className="booking-form__date-title">Сегодня</legend>
-              <div className="booking-form__date-inner-wrapper">
-                <label className="custom-radio booking-form__date">
-                  <input
-                    type="radio"
-                    id="today9h45m"
-                    name="date"
-                    required
-                    defaultValue="today9h45m"
-                  />
-                  <span className="custom-radio__label">9:45</span>
-                </label>
-                <label className="custom-radio booking-form__date">
-                  <input
-                    type="radio"
-                    id="today15h00m"
-                    name="date"
-                    defaultChecked
-                    required
-                    defaultValue="today15h00m"
-                  />
-                  <span className="custom-radio__label">15:00</span>
-                </label>
-                <label className="custom-radio booking-form__date">
-                  <input
-                    type="radio"
-                    id="today17h30m"
-                    name="date"
-                    required
-                    defaultValue="today17h30m"
-                  />
-                  <span className="custom-radio__label">17:30</span>
-                </label>
-                <label className="custom-radio booking-form__date">
-                  <input
-                    type="radio"
-                    id="today19h30m"
-                    name="date"
-                    required
-                    defaultValue="today19h30m"
-                    disabled
-                  />
-                  <span className="custom-radio__label">19:30</span>
-                </label>
-                <label className="custom-radio booking-form__date">
-                  <input
-                    type="radio"
-                    id="today21h30m"
-                    name="date"
-                    required
-                    defaultValue="today21h30m"
-                  />
-                  <span className="custom-radio__label">21:30</span>
-                </label>
-              </div>
-            </fieldset>
-            <fieldset className="booking-form__date-section">
-              <legend className="booking-form__date-title">Завтра</legend>
-              <div className="booking-form__date-inner-wrapper">
-                <label className="custom-radio booking-form__date">
-                  <input
-                    type="radio"
-                    id="tomorrow11h00m"
-                    name="date"
-                    required
-                    defaultValue="tomorrow11h00m"
-                  />
-                  <span className="custom-radio__label">11:00</span>
-                </label>
-                <label className="custom-radio booking-form__date">
-                  <input
-                    type="radio"
-                    id="tomorrow15h00m"
-                    name="date"
-                    required
-                    defaultValue="tomorrow15h00m"
-                    disabled
-                  />
-                  <span className="custom-radio__label">15:00</span>
-                </label>
-                <label className="custom-radio booking-form__date">
-                  <input
-                    type="radio"
-                    id="tomorrow17h30m"
-                    name="date"
-                    required
-                    defaultValue="tomorrow17h30m"
-                    disabled
-                  />
-                  <span className="custom-radio__label">17:30</span>
-                </label>
-                <label className="custom-radio booking-form__date">
-                  <input
-                    type="radio"
-                    id="tomorrow19h45m"
-                    name="date"
-                    required
-                    defaultValue="tomorrow19h45m"
-                  />
-                  <span className="custom-radio__label">19:45</span>
-                </label>
-                <label className="custom-radio booking-form__date">
-                  <input
-                    type="radio"
-                    id="tomorrow21h30m"
-                    name="date"
-                    required
-                    defaultValue="tomorrow21h30m"
-                  />
-                  <span className="custom-radio__label">21:30</span>
-                </label>
-              </div>
-            </fieldset>
-          </fieldset>
-          <fieldset className="booking-form__section">
-            <legend className="visually-hidden">Контактная информация</legend>
-            <div className="custom-input booking-form__input">
-              <label className="custom-input__label" htmlFor="name">
-              Ваше имя
-              </label>
-              <input
-                type="text"
-                id="name"
-                name="name"
-                placeholder="Имя"
-                required
-                pattern="[А-Яа-яЁёA-Za-z'- ]{1,}"
-              />
-            </div>
-            <div className="custom-input booking-form__input">
-              <label className="custom-input__label" htmlFor="tel">
-              Контактный телефон
-              </label>
-              <input
-                type="tel"
-                id="tel"
-                name="tel"
-                placeholder="Телефон"
-                required
-                pattern="[0-9]{10,}"
-              />
-            </div>
-            <div className="custom-input booking-form__input">
-              <label className="custom-input__label" htmlFor="person">
-              Количество участников
-              </label>
-              <input
-                type="number"
-                id="person"
-                name="person"
-                placeholder="Количество участников"
-                required
-              />
-            </div>
-            <label className="custom-checkbox booking-form__checkbox booking-form__checkbox--children">
-              <input
-                type="checkbox"
-                id="children"
-                name="children"
-                defaultChecked
-              />
-              <span className="custom-checkbox__icon">
-                <svg width={20} height={17} aria-hidden="true">
-                  <use xlinkHref="#icon-tick" />
-                </svg>
-              </span>
-              <span className="custom-checkbox__label">
-              Со&nbsp;мной будут дети
-              </span>
-            </label>
-          </fieldset>
+          <BookingFormDate slots={chosenQuestInfo ? chosenQuestInfo.slots : bookingInfo[0].slots}/>
+          <BookingFormContacts/>
           <button
             className="btn btn--accent btn--cta booking-form__submit"
             type="submit"
