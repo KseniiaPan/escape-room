@@ -1,6 +1,5 @@
 import {useState} from 'react';
-import BookingFormContacts from '../../components/booking-form-contacts/booking-form-contacts';
-import BookingFormDate from '../../components/booking-form-date/booking-form-date';
+import BookingForm from '../../components/booking-form/booking-form';
 import MapBooking from '../../components/map-booking/map-booking';
 import {QuestBookingInfo} from '../../types/quests-types';
 import {defaultSpbCoords} from '../../consts';
@@ -20,6 +19,7 @@ function QuestBookingPage({bookingInfo}:QuestBookingPageProps): JSX.Element {
   };
 
   const chosenQuestInfo = activeQuestLocation && bookingInfo.find((bookingInfoItem) => bookingInfoItem.id === activeQuestLocation);
+  const displayedQuestInfo = chosenQuestInfo || bookingInfo[0];
 
   return (
     <main className="page-content decorated-page">
@@ -55,44 +55,11 @@ function QuestBookingPage({bookingInfo}:QuestBookingPageProps): JSX.Element {
               </div>
             </div>
             <p className="booking-map__address">
-            Вы&nbsp;выбрали: {chosenQuestInfo ? chosenQuestInfo.location.address : bookingInfo[0].location.address}
+            Вы&nbsp;выбрали: {displayedQuestInfo.location.address}
             </p>
           </div>
         </div>
-        <form
-          className="booking-form"
-          action="https://echo.htmlacademy.ru/"
-          method="post"
-        >
-          <BookingFormDate slots={chosenQuestInfo ? chosenQuestInfo.slots : bookingInfo[0].slots}/>
-          <BookingFormContacts/>
-          <button
-            className="btn btn--accent btn--cta booking-form__submit"
-            type="submit"
-          >
-          Забронировать
-          </button>
-          <label className="custom-checkbox booking-form__checkbox booking-form__checkbox--agreement">
-            <input
-              type="checkbox"
-              id="id-order-agreement"
-              name="user-agreement"
-              required
-            />
-            <span className="custom-checkbox__icon">
-              <svg width={20} height={17} aria-hidden="true">
-                <use xlinkHref="#icon-tick" />
-              </svg>
-            </span>
-            <span className="custom-checkbox__label">
-            Я&nbsp;согласен с
-              <a className="link link--active-silver link--underlined" href="#">
-              правилами обработки персональных данных
-              </a>
-            &nbsp;и пользовательским соглашением
-            </span>
-          </label>
-        </form>
+        <BookingForm questInfo={displayedQuestInfo}/>
       </div>
     </main>
   );
