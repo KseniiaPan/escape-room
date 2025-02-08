@@ -40,4 +40,5 @@ export type QuestBookingForm = {
   contactPerson: string;
   phone: string;
   peopleCount: undefined | number;
+  withChildren?: boolean;
 };

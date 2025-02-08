@@ -1,4 +1,6 @@
+import {useForm} from 'react-hook-form';
 import {QuestBookingForm} from '../../types/quests-types';
+
 type BookingFormContactsProps = {
   formData: QuestBookingForm;
   isChecked: boolean;
@@ -7,6 +9,8 @@ type BookingFormContactsProps = {
 }
 
 function BookingFormContacts({formData, isChecked, onChange, onCkeckboxValueChange}:BookingFormContactsProps): JSX.Element {
+  const {register, formState: {errors}} = useForm<QuestBookingForm>();
+
   return (
     <fieldset className="booking-form__section">
       <legend className="visually-hidden">Контактная информация</legend>
@@ -16,14 +20,20 @@ function BookingFormContacts({formData, isChecked, onChange, onCkeckboxValueChan
         </label>
         <input
           type="text"
+          {...register('contactPerson', {
+            required: 'Укажите имя',
+            pattern: {
+              value: /^[а-яА-ЯёЁa-zA-Z'-]+ ?[а-яА-ЯёЁa-zA-Z'-]+ ?[а-яА-ЯёЁa-zA-Z'-]{1,15}$/,
+              message: 'Валидное имя должно состоять из 1-15 букв кириллицы или латиницы'
+            }
+          })}
           id="name"
           name="contactPerson"
           value={formData.contactPerson}
           onChange={onChange}
           placeholder="Имя"
-          required
-          pattern="[А-Яа-яЁёA-Za-z'- ]{1,}"
         />
+        {errors.contactPerson && <><br/><span role="alert">{errors.contactPerson?.message}</span></>}
       </div>
       <div className="custom-input booking-form__input">
         <label className="custom-input__label" htmlFor="tel">
@@ -31,13 +41,18 @@ function BookingFormContacts({formData, isChecked, onChange, onCkeckboxValueChan
         </label>
         <input
           type="tel"
+          {...register('phone', {
+            required: 'Укажите номер телефона',
+            pattern: {
+              value: /^\+7\s\(([0-9]{3})\)\s\d{3}-\d{2}-\d{2}$/,
+              message: 'Введите номер формата +7 (000) 000-00-00 (Ру-формат)'
+            }
+          })}
           id="tel"
           name="phone"
           value={String(formData.phone)}
           onChange={onChange}
           placeholder="Телефон"
-          required
-          pattern="[0-9]{10,}"
         />
       </div>
       <div className="custom-input booking-form__input">
@@ -46,6 +61,9 @@ function BookingFormContacts({formData, isChecked, onChange, onCkeckboxValueChan
         </label>
         <input
           type="number"
+          {...register('peopleCount', {
+            required: 'Укажите количество участников',
+          })}
           id="person"
           name="peopleCount"
           value={Number(formData.peopleCount)}
