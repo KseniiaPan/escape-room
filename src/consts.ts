@@ -16,6 +16,13 @@ export enum AuthorizationStatus {
   Unknown = 'UNKNOWN',
 }
 
+export enum NameSpace {
+  App = 'App',
+  Quests = 'Quests',
+  Quest = 'Quest',
+  User = 'User',
+}
+
 export const questLevels = [
   {
     name: 'any',
