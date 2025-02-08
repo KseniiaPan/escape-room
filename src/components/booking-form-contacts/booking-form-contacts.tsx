@@ -1,4 +1,5 @@
 import {useForm} from 'react-hook-form';
+import {ErrorMessage} from '@hookform/error-message';
 import {QuestBookingForm} from '../../types/quests-types';
 
 type BookingFormContactsProps = {
@@ -25,7 +26,11 @@ function BookingFormContacts({formData, isChecked, onChange, onCkeckboxValueChan
             pattern: {
               value: /^[а-яА-ЯёЁa-zA-Z'-]+ ?[а-яА-ЯёЁa-zA-Z'-]+ ?[а-яА-ЯёЁa-zA-Z'-]{1,15}$/,
               message: 'Валидное имя должно состоять из 1-15 букв кириллицы или латиницы'
-            }
+            },
+            maxLength: {
+              value: 15,
+              message: 'Длина имени не должна превышать 15 символов.',
+            },
           })}
           id="name"
           name="contactPerson"
@@ -33,7 +38,15 @@ function BookingFormContacts({formData, isChecked, onChange, onCkeckboxValueChan
           onChange={onChange}
           placeholder="Имя"
         />
-        {errors.contactPerson && <><br/><span role="alert">{errors.contactPerson?.message}</span></>}
+        <ErrorMessage
+          errors={errors}
+          name="contactPerson"
+          render={({ messages }) =>
+            messages &&
+          Object.entries(messages).map(([type, message]) => (
+            <p key={type}>{message}</p>
+          ))}
+        />
       </div>
       <div className="custom-input booking-form__input">
         <label className="custom-input__label" htmlFor="tel">
@@ -54,6 +67,15 @@ function BookingFormContacts({formData, isChecked, onChange, onCkeckboxValueChan
           onChange={onChange}
           placeholder="Телефон"
         />
+        <ErrorMessage
+          errors={errors}
+          name="phone"
+          render={({ messages }) =>
+            messages &&
+          Object.entries(messages).map(([type, message]) => (
+            <p key={type}>{message}</p>
+          ))}
+        />
       </div>
       <div className="custom-input booking-form__input">
         <label className="custom-input__label" htmlFor="person">
@@ -71,6 +93,7 @@ function BookingFormContacts({formData, isChecked, onChange, onCkeckboxValueChan
           placeholder="Количество участников"
           required
         />
+        {errors.peopleCount && <><br/><span role="alert">{errors.peopleCount?.message}</span></>}
       </div>
       <label className="custom-checkbox booking-form__checkbox booking-form__checkbox--children">
         <input

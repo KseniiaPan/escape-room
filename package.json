@@ -10,6 +10,7 @@
     "test": "vitest --passWithNoTests"
   },
   "dependencies": {
+    "@hookform/error-message": "^2.0.1",
     "@reduxjs/toolkit": "1.9.5",
     "axios": "0.27.2",
     "classnames": "2.3.2",
