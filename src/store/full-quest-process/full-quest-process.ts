@@ -24,7 +24,7 @@ export const fullQuestProcess = createSlice({
       })
       .addCase(fetchQuestDataAction.rejected, (state) => {
         state.isFullQuestDataLoading = false;
-        toast.error('Произошла ошибка при загрузке данных о квесте, попробуйте езе раз');
+        toast.error('Произошла ошибка при загрузке данных о квесте, попробуйте еще раз');
       });
   }
 });

@@ -10,12 +10,8 @@ import NotFoundPage from '../../pages/not-found-page/not-found-page';
 import PrivateRoute from '../private-route/private-route';
 import Layout from '../layout/layout';
 import {AppRoute} from '../../consts';
-import {QuestBookingInfo} from '../../types/quests-types';
 
-type AppProps = {
-  bookingInfo: QuestBookingInfo[];
-}
-function App({bookingInfo}: AppProps): JSX.Element {
+function App(): JSX.Element {
   return (
     <HelmetProvider>
       <BrowserRouter>
@@ -47,7 +43,7 @@ function App({bookingInfo}: AppProps): JSX.Element {
               path={AppRoute.QuestBooking}
               element={
                 <PrivateRoute>
-                  <QuestBookingPage bookingInfo={bookingInfo}/>
+                  <QuestBookingPage />
                 </PrivateRoute>
               }
             />

@@ -21,6 +21,7 @@ export enum NameSpace {
   Quests = 'Quests',
   Quest = 'Quest',
   User = 'User',
+  Booking = 'Booking',
 }
 
 export enum APIRoute {
