@@ -4,7 +4,7 @@ import {AppDispatch, State} from '../types/state-types';
 import {UserData} from '../types/user-data-types';
 import {AuthData} from '../types/auth-data-types';
 import {APIRoute} from '../consts';
-import {Quest, FullQuest, QuestBookingInfo} from '../types/quests-types';
+import {Quest, FullQuest, QuestBookingInfo, QuestResevation} from '../types/quests-types';
 
 export const checkAuthAction = createAsyncThunk<UserData, undefined, {
   dispatch: AppDispatch;
@@ -73,6 +73,18 @@ export const fetchBookingDataAction = createAsyncThunk<QuestBookingInfo[], strin
   'data/fetchBookingData',
   async (id, {extra: api}) => {
     const {data} = await api.get<QuestBookingInfo[]>(`${APIRoute.Quests}/${id}${APIRoute.Booking}`);
+    return data;
+  },
+);
+
+export const fetchReservationsAction = createAsyncThunk<QuestResevation[], undefined, {
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
+}>(
+  'data/fetchFavoriteOffers',
+  async (_arg, {extra: api}) => {
+    const {data} = await api.get<QuestResevation[]>(APIRoute.MyReservations);
     return data;
   },
 );

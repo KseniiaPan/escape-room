@@ -29,7 +29,7 @@ export enum APIRoute {
   Login = '/login',
   Logout = '/logout',
   Booking= '/booking',
-  MyBooking='/reservation',
+  MyReservations='/reservation',
 }
 
 export const questLevels = [

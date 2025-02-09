@@ -48,3 +48,9 @@ export type QuestBookingForm = {
   peopleCount: undefined | number;
   withChildren?: boolean;
 };
+
+export type QuestResevation = QuestBookingForm & {
+  id: string;
+  location: QuestLocation;
+  quest: Quest;
+};
