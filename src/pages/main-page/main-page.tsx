@@ -1,22 +1,28 @@
 import {Helmet} from 'react-helmet-async';
 import QuestsFiltersContainer from '../../components/quests-filters-container/quests-filters-container';
 import QuestCardsList from '../../components/quest-cards-list/quest-cards-list';
-import {Quest} from '../../types/quests-types';
+import LoadingPage from '../loading-page/loading-page';
 import {useAppSelector} from '../../hooks/index';
 import {getCurrentQuestTheme, getCurrentQuestLevel} from '../../store/app-process/selectors';
 import {questThemes, questLevels} from '../../consts';
+import {getQuestsData, getQuestsLoadingStatus} from '../../store/quests-process/selectors';
 
-type MainPageProps = {
-  quests: Quest[];
-}
-function MainPage({quests}: MainPageProps): JSX.Element {
+function MainPage(): JSX.Element {
+  const quests = useAppSelector(getQuestsData);
   const currentQuestTheme = useAppSelector(getCurrentQuestTheme);
   const currentQuestLevel = useAppSelector(getCurrentQuestLevel);
+  const isDataLoading = useAppSelector(getQuestsLoadingStatus);
 
   const filteredQuestsByTheme = quests.filter((quest) => quest.type === currentQuestTheme);
   const questsByTheme = currentQuestTheme === questThemes[0].name ? quests : filteredQuestsByTheme;
   const questsByLevel = questsByTheme.filter((quest) => quest.level === currentQuestLevel);
   const displayedQuests = currentQuestLevel === questLevels[0].name ? questsByTheme : questsByLevel;
+
+  if (isDataLoading) {
+    return (
+      <LoadingPage />
+    );
+  }
 
   return (
     <main className="page-content">

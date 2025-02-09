@@ -4,6 +4,7 @@ import {AppDispatch, State} from '../types/state-types';
 import {UserData} from '../types/user-data-types';
 import {AuthData} from '../types/auth-data-types';
 import {APIRoute} from '../consts';
+import {Quest} from '../types/quests-types';
 
 export const checkAuthAction = createAsyncThunk<UserData, undefined, {
   dispatch: AppDispatch;
@@ -37,5 +38,17 @@ export const logoutAction = createAsyncThunk<void, undefined, {
   'user/logout',
   async (_arg, {extra: api}) => {
     await api.delete(APIRoute.Logout);
+  },
+);
+
+export const fetchQuestsAction = createAsyncThunk<Quest[], undefined, {
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
+}>(
+  'data/fetchQuests',
+  async (_arg, {extra: api}) => {
+    const {data} = await api.get<Quest[]>(APIRoute.Quests);
+    return data;
   },
 );

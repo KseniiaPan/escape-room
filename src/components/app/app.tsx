@@ -10,13 +10,12 @@ import NotFoundPage from '../../pages/not-found-page/not-found-page';
 import PrivateRoute from '../private-route/private-route';
 import Layout from '../layout/layout';
 import {AppRoute} from '../../consts';
-import {Quest, QuestBookingInfo} from '../../types/quests-types';
+import {QuestBookingInfo} from '../../types/quests-types';
 
 type AppProps = {
-  quests: Quest[];
   bookingInfo: QuestBookingInfo[];
 }
-function App({quests, bookingInfo}: AppProps): JSX.Element {
+function App({bookingInfo}: AppProps): JSX.Element {
   return (
     <HelmetProvider>
       <BrowserRouter>
@@ -24,7 +23,7 @@ function App({quests, bookingInfo}: AppProps): JSX.Element {
           <Route path='/' element={<Layout />}>
             <Route
               path={AppRoute.Main}
-              element={<MainPage quests={quests}/>}
+              element={<MainPage />}
             />
             <Route
               path={AppRoute.Login}
