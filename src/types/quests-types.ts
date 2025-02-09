@@ -10,6 +10,12 @@ export type Quest = {
     peopleMinMax: number[];
   };
 
+export type FullQuest = Quest & {
+    description: string;
+    coverImg: string;
+    coverImgWebp: string;
+  }
+
 export type QuestFilter = {
       name: string;
       ruName: string;

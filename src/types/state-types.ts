@@ -1,6 +1,6 @@
 import {store} from '../store/index';
 import {UserData} from '../types/user-data-types';
-import {Quest} from './quests-types';
+import {Quest, FullQuest} from './quests-types';
 import {AuthorizationStatus} from '../consts';
 
 export type State = ReturnType<typeof store.getState>;
@@ -20,4 +20,8 @@ export type UserProcess = {
 export type QuestsProcess ={
   quests: Quest[];
   isQuestsDataLoading: boolean;
+}
+export type FullQuestProcess ={
+  fullQuestData: FullQuest | null;
+  isFullQuestDataLoading: boolean;
 }
