@@ -1,6 +1,7 @@
 import {Helmet} from 'react-helmet-async';
 import QuestsFiltersContainer from '../../components/quests-filters-container/quests-filters-container';
 import QuestCardsList from '../../components/quest-cards-list/quest-cards-list';
+import QuestCardsEmptyList from '../../components/quest-cards-empty-list/quest-cards-empty-list';
 import LoadingPage from '../loading-page/loading-page';
 import {useAppSelector} from '../../hooks/index';
 import {getCurrentQuestTheme, getCurrentQuestLevel} from '../../store/app-process/selectors';
@@ -42,7 +43,9 @@ function MainPage(): JSX.Element {
           <QuestsFiltersContainer />
         </div>
         <h2 className="title visually-hidden">Выберите квест</h2>
-        <QuestCardsList quests={displayedQuests} />
+        {displayedQuests.length > 0 ?
+          <QuestCardsList quests={displayedQuests} /> :
+          <QuestCardsEmptyList/>}
       </div>
     </main>
   );
