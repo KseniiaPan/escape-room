@@ -1,4 +1,3 @@
-import {useState} from 'react';
 import QuestsFiltersContainer from '../../components/quests-filters-container/quests-filters-container';
 import QuestCardsList from '../../components/quest-cards-list/quest-cards-list';
 import {Quest} from '../../types/quests-types';
@@ -10,7 +9,6 @@ type MainPageProps = {
   quests: Quest[];
 }
 function MainPage({quests}: MainPageProps): JSX.Element {
-  const [activeCard, setActiveCard] = useState<string | null>(null);
   const currentQuestTheme = useAppSelector(getCurrentQuestTheme);
   const currentQuestLevel = useAppSelector(getCurrentQuestLevel);
 
@@ -19,11 +17,6 @@ function MainPage({quests}: MainPageProps): JSX.Element {
   const questsByLevel = questsByTheme.filter((quest) => quest.level === currentQuestLevel);
   const displayedQuests = currentQuestLevel === questLevels[0].name ? questsByTheme : questsByLevel;
 
-  const handleActiveCardChange = (id: string | null) => {
-    if (id !== activeCard) {
-      setActiveCard(id);
-    }
-  };
   return (
     <main className="page-content">
       <div className="container">
@@ -39,7 +32,7 @@ function MainPage({quests}: MainPageProps): JSX.Element {
           <QuestsFiltersContainer />
         </div>
         <h2 className="title visually-hidden">Выберите квест</h2>
-        <QuestCardsList quests={displayedQuests} onActiveCardChange={handleActiveCardChange}/>
+        <QuestCardsList quests={displayedQuests} />
       </div>
     </main>
   );
