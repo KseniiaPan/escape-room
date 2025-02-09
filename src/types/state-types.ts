@@ -1,4 +1,6 @@
 import {store} from '../store/index';
+import {UserData} from '../types/user-data-types';
+import {AuthorizationStatus} from '../consts';
 
 export type State = ReturnType<typeof store.getState>;
 
@@ -8,3 +10,8 @@ export type AppProcess = {
   currentQuestTheme: string;
   currentQuestLevel: string;
 }
+
+export type UserProcess = {
+  authorizationStatus: AuthorizationStatus;
+  userData: UserData | null;
+};

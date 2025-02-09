@@ -1,6 +1,5 @@
 import {Route, BrowserRouter, Routes} from 'react-router-dom';
 import {HelmetProvider} from 'react-helmet-async';
-
 import ContactsPage from '../../pages/contacts-page/contacts-page';
 import LoginPage from '../../pages/login-page/login-page';
 import MainPage from '../../pages/main-page/main-page';
@@ -10,7 +9,7 @@ import QuestPage from '../../pages/quest-page/quest-page';
 import NotFoundPage from '../../pages/not-found-page/not-found-page';
 import PrivateRoute from '../private-route/private-route';
 import Layout from '../layout/layout';
-import {AppRoute, AuthorizationStatus} from '../../consts';
+import {AppRoute} from '../../consts';
 import {Quest, QuestBookingInfo} from '../../types/quests-types';
 
 type AppProps = {
@@ -36,9 +35,7 @@ function App({quests, bookingInfo}: AppProps): JSX.Element {
             <Route
               path={AppRoute.MyQuests}
               element={
-                <PrivateRoute
-                  authorizationStatus={AuthorizationStatus.Auth}
-                >
+                <PrivateRoute>
                   <MyQuestsPage />
                 </PrivateRoute>
               }
@@ -50,9 +47,7 @@ function App({quests, bookingInfo}: AppProps): JSX.Element {
             <Route
               path={AppRoute.QuestBooking}
               element={
-                <PrivateRoute
-                  authorizationStatus={AuthorizationStatus.Auth}
-                >
+                <PrivateRoute>
                   <QuestBookingPage bookingInfo={bookingInfo}/>
                 </PrivateRoute>
               }

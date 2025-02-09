@@ -1,12 +1,40 @@
 import {Link} from 'react-router-dom';
+import {useRef, FormEvent} from 'react';
+import {useNavigate} from 'react-router-dom';
+import {useAppDispatch} from '../../hooks/index';
+import {loginAction} from '../../store/api-actions';
+import {AppRoute} from '../../consts';
 
 function LoginForm(): JSX.Element {
+  const loginRef = useRef<HTMLInputElement | null>(null);
+  const passwordRef = useRef<HTMLInputElement | null>(null);
+
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+
+  const handleLoginFormSubmit = (evt: FormEvent<HTMLFormElement>) => {
+    evt.preventDefault();
+
+    if (loginRef.current !== null && passwordRef.current !== null) {
+      dispatch(loginAction({
+        email: loginRef.current.value,
+        password: passwordRef.current.value
+      }))
+        .then((response) => {
+          if (response.meta.requestStatus === 'fulfilled') {
+            navigate(AppRoute.Main);
+          }
+        });
+    }
+  };
+
   return (
     <div className="login__form">
       <form
         className="login-form"
         action="https://echo.htmlacademy.ru/"
         method="post"
+        onSubmit={handleLoginFormSubmit}
       >
         <div className="login-form__inner-wrapper">
           <h1 className="title title--size-s login-form__title">Вход</h1>
@@ -16,6 +44,7 @@ function LoginForm(): JSX.Element {
                   E&nbsp;–&nbsp;mail
               </label>
               <input
+                ref={loginRef}
                 type="email"
                 id="email"
                 name="email"
@@ -28,6 +57,7 @@ function LoginForm(): JSX.Element {
                   Пароль
               </label>
               <input
+                ref={passwordRef}
                 type="password"
                 id="password"
                 name="password"

@@ -23,6 +23,14 @@ export enum NameSpace {
   User = 'User',
 }
 
+export enum APIRoute {
+  Quests = '/quest',
+  Login = '/login',
+  Logout = '/logout',
+  Booking= '/booking',
+  MyBooking='/reservation',
+}
+
 export const questLevels = [
   {
     name: 'any',
