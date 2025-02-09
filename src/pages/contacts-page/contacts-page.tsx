@@ -1,3 +1,4 @@
+import {Helmet} from 'react-helmet-async';
 import Map from '../../components/map/map';
 
 import {contactsAddresses} from '../../consts';
@@ -5,6 +6,9 @@ import {contactsAddresses} from '../../consts';
 function ContactsPage(): JSX.Element {
   return (
     <main className="page-content decorated-page">
+      <Helmet>
+        <title>Контакты - Escape Room</title>
+      </Helmet>
       <div className="decorated-page__decor" aria-hidden="true">
         <picture>
           <source

@@ -1,3 +1,4 @@
+import {Helmet} from 'react-helmet-async';
 import QuestsFiltersContainer from '../../components/quests-filters-container/quests-filters-container';
 import QuestCardsList from '../../components/quest-cards-list/quest-cards-list';
 import {Quest} from '../../types/quests-types';
@@ -19,6 +20,9 @@ function MainPage({quests}: MainPageProps): JSX.Element {
 
   return (
     <main className="page-content">
+      <Helmet>
+        <title>Escape Room</title>
+      </Helmet>
       <div className="container">
         <div className="page-content__title-wrapper">
           <h1 className="subtitle page-content__subtitle">

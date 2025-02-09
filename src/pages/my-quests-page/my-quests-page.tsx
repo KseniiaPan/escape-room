@@ -1,6 +1,11 @@
+import {Helmet} from 'react-helmet-async';
+
 function MyQuestsPage(): JSX.Element {
   return (
     <main className="page-content decorated-page">
+      <Helmet>
+        <title>Мои бронирования - Escape Room</title>
+      </Helmet>
       <div className="decorated-page__decor" aria-hidden="true">
         <picture>
           <source

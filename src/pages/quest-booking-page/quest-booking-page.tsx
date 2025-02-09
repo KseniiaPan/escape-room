@@ -1,3 +1,4 @@
+import {Helmet} from 'react-helmet-async';
 import {useState} from 'react';
 import BookingForm from '../../components/booking-form/booking-form';
 import Map from '../../components/map/map';
@@ -24,6 +25,9 @@ function QuestBookingPage({bookingInfo}:QuestBookingPageProps): JSX.Element {
 
   return (
     <main className="page-content decorated-page">
+      <Helmet>
+        <title>Бронирование квеста - Escape Room</title>
+      </Helmet>
       <div className="decorated-page__decor" aria-hidden="true">
         <picture>
           <source

@@ -1,3 +1,4 @@
+import {Helmet} from 'react-helmet-async';
 import {Link} from 'react-router-dom';
 import {AppRoute} from '../../consts';
 
@@ -5,6 +6,9 @@ function QuestPage(): JSX.Element {
   const mockId = '27af4ec9-ebe6-4eeb-b871-1d32e2d44709';
   return (
     <main className="decorated-page quest-page">
+      <Helmet>
+        <title>Квест - Escape Room</title>
+      </Helmet>
       <div className="decorated-page__decor" aria-hidden="true">
         <picture>
           <source

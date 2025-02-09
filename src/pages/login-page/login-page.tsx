@@ -1,8 +1,12 @@
+import {Helmet} from 'react-helmet-async';
 import LoginForm from '../../components/login-form/login-form';
 
 function LoginPage(): JSX.Element {
   return (
     <main className="decorated-page login">
+      <Helmet>
+        <title>Авторизация - Escape Room</title>
+      </Helmet>
       <div className="decorated-page__decor" aria-hidden="true">
         <picture>
           <source
