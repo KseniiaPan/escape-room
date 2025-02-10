@@ -1,34 +1,36 @@
 import {useForm, SubmitHandler} from 'react-hook-form';
+import {ChangeEvent, useState} from 'react';
 import BookingFormContacts from '../../components/booking-form-contacts/booking-form-contacts';
 import BookingFormDate from '../../components/booking-form-date/booking-form-date';
 import {QuestBookingInfo} from '../../types/quests-types';
-import {ChangeEvent, useState} from 'react';
 import {QuestBookingForm} from '../../types/quests-types';
 
 type QuestBookingPageProps = {
   questInfo: QuestBookingInfo;
 }
 
-const initialState: QuestBookingForm = {
-  date: '',
-  time: '',
-  contactPerson: '',
-  phone: '',
-  peopleCount: undefined,
-};
-
 function BookingForm({questInfo}:QuestBookingPageProps) {
+  const initialState: QuestBookingForm = {
+    date: '',
+    time: '',
+    contactPerson: '',
+    phone: '',
+    withChildren: true,
+    peopleCount: 1,
+    placeId: questInfo.id,
+  };
   const {handleSubmit } = useForm<QuestBookingForm>();
 
   const [formData, setFormData] = useState<QuestBookingForm>(initialState);
-  const [checked, setChecked] = useState<boolean>(true);
 
-  const handleValueChange = (evt: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>):void => {
+  const handleValueChange = (evt: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const {value, dataset, name} = evt.target;
     setFormData(name === 'date' ? {...formData, date: dataset.day, time: dataset.time} : {...formData, [name]: value});
   };
 
-  const handleCheckboxValueChange = () => setChecked(!checked);
+  const handleCheckboxValueChange = ()=> {
+    setFormData({...formData, withChildren: !formData.withChildren});
+  };
 
   const onSubmit: SubmitHandler<QuestBookingForm> = (data) => console.log(data);
 
@@ -40,7 +42,7 @@ function BookingForm({questInfo}:QuestBookingPageProps) {
       onSubmit={(event) => void handleSubmit(onSubmit)(event)}
     >
       <BookingFormDate slots={questInfo.slots} formData={formData} onChange={handleValueChange}/>
-      <BookingFormContacts formData={formData} onChange={handleValueChange} onCkeckboxValueChange={handleCheckboxValueChange} isChecked={checked}/>
+      <BookingFormContacts formData={formData} onChange={handleValueChange} onCkeckboxValueChange={handleCheckboxValueChange} isChecked={formData.withChildren}/>
       <button
         className="btn btn--accent btn--cta booking-form__submit"
         type="submit"

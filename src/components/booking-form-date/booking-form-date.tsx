@@ -21,7 +21,6 @@ function BookingFormDate({slots, formData, onChange}: BookingFormDateProps): JSX
                 id={`today${slot.time}`}
                 name="date"
                 required
-                defaultValue={`today${slot.time}`}
                 value={formData.date && formData.time && `${formData.date}${formData.time}}`}
                 onChange={onChange}
                 data-day = 'today'
@@ -44,7 +43,6 @@ function BookingFormDate({slots, formData, onChange}: BookingFormDateProps): JSX
                 id={`tomorrow${slot.time}`}
                 name="date"
                 required
-                defaultValue={`tomorrow${slot.time}`}
                 value={formData.date && formData.time && `${formData.date}${formData.time}}`}
                 onChange={onChange}
                 data-day = 'tomorrow'

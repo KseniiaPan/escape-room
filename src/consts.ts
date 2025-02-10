@@ -78,18 +78,18 @@ export const questThemes = [
   },
 ];
 
-export const MapIconInfo = {
+const MapIconInfo = {
   iconSize: [23, 42],
   iconAnchor: [20, 40]
 };
 
 export const MapIcon = {
   Default: {
-    iconUrl: 'public/img/svg/pin-default.svg',
+    iconUrl: '/img/svg/pin-default.svg',
     MapIconInfo
   },
   Active: {
-    iconUrl: 'public/img/svg/pin-active.svg',
+    iconUrl: '/img/svg/pin-active.svg',
     MapIconInfo
   },
 } as const;
